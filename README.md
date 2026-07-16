@@ -63,6 +63,31 @@ should not use this plugin.
   one goes through `wp_insert_post_data`, where the save filter sanitizes
   again.
 
+## WP-CLI usage
+
+```
+# List affected rows without changing anything (dry-run is the default).
+$ wp sanitize-characters
+post 42 [post] post_title,post_content: Example post title
+meta 137 (post 42, subtitle)
+Success: Would clean 2 posts and 1 meta rows (dry-run; pass --apply to persist).
+
+# Persist the changes.
+$ wp sanitize-characters --apply
+Success: Cleaned 2 posts and 1 meta rows.
+
+# Verify: a second run finds nothing.
+$ wp sanitize-characters
+Success: Would clean 0 posts and 0 meta rows (dry-run; pass --apply to persist).
+```
+
+One line is printed per affected row — `post <ID> [<type>] <columns>: <title>`
+for posts, `meta <meta_id> (post <ID>, <key>)` for post meta. Meta rows whose
+value is a serialized object are reported and skipped. `wp help
+sanitize-characters` shows the full synopsis. Running it periodically is
+harmless: the save-time filters keep new content clean, so the command only
+finds rows written while the plugin was inactive.
+
 ## Background and related work
 
 - WordPress core removes invisible characters from **slugs only** when

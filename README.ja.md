@@ -63,6 +63,31 @@ Google ドキュメントや Notion などの原稿作成ツールは、改行�
   復元時は `wp_insert_post_data` を通るため、保存フィルタが改めて浄化
   します。
 
+## WP-CLI の使い方
+
+```
+# 対象行の一覧だけ表示（デフォルトが dry-run。何も変更しません）
+$ wp sanitize-characters
+post 42 [post] post_title,post_content: サンプル記事タイトル
+meta 137 (post 42, subtitle)
+Success: Would clean 2 posts and 1 meta rows (dry-run; pass --apply to persist).
+
+# 反映する
+$ wp sanitize-characters --apply
+Success: Cleaned 2 posts and 1 meta rows.
+
+# 確認: もう一度実行すると 0 件になる
+$ wp sanitize-characters
+Success: Would clean 0 posts and 0 meta rows (dry-run; pass --apply to persist).
+```
+
+対象行ごとに 1 行出力されます — 投稿は `post <ID> [<type>] <列>: <タイトル>`、
+メタは `meta <meta_id> (post <ID>, <キー>)`。シリアライズされたオブジェクト
+値のメタは報告のうえスキップされます。`wp help sanitize-characters` で
+完全なシノプシスを確認できます。定期実行しても無害です — 保存時フィルタが
+新規コンテンツをクリーンに保つため、このコマンドが見つけるのはプラグイン
+無効時に書き込まれた行だけです。
+
 ## 背景・関連リンク
 
 - WordPress コアが不可視文字を除去するのは、パーマリンク生成時の

@@ -1,5 +1,12 @@
 # WPPack Sanitize Characters
 
+[![CI](https://img.shields.io/github/actions/workflow/status/wppack-io/sanitize-characters-plugin/ci.yml?branch=1.x)](https://github.com/wppack-io/sanitize-characters-plugin/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-777BB4.svg)](https://php.net)
+[![WordPress](https://img.shields.io/badge/WordPress-6.7%2B-21759B.svg)](https://wordpress.org)
+
+[日本語版 README](README.ja.md)
+
 Sanitizes invisible and control characters out of content on its way into
 WordPress and out of search terms on their way into a query. No settings
 screen, no options in the database.

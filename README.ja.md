@@ -1,5 +1,12 @@
 # WPPack Sanitize Characters
 
+[![CI](https://img.shields.io/github/actions/workflow/status/wppack-io/sanitize-characters-plugin/ci.yml?branch=1.x)](https://github.com/wppack-io/sanitize-characters-plugin/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![PHP Version](https://img.shields.io/badge/PHP-8.2%2B-777BB4.svg)](https://php.net)
+[![WordPress](https://img.shields.io/badge/WordPress-6.7%2B-21759B.svg)](https://wordpress.org)
+
+[English README](README.md)
+
 不可視文字・制御文字を、保存時のコンテンツと検索時の検索語から
 除去します。設定画面なし、データベースにオプションも書き込みません。
 

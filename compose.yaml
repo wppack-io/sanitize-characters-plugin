@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:8.0
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sanitize_characters_dev
+    ports:
+      - '3314:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  mysql-test:
+    image: mysql:8.0
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: sanitize_characters_test
+    ports:
+      - '3313:3306'
+    tmpfs:
+      - /var/lib/mysql
+
+volumes:
+  mysql-data:

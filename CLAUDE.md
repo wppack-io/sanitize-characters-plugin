@@ -103,6 +103,15 @@ To verify in the browser: `bin/dev-reset`, search for `Dirty` in the admin
 post list (the seeded dirty title matches only after cleaning), run
 `vendor/bin/wp sanitize-characters --apply`, search again.
 
+## Release procedure
+
+- **Bump the `Version:` header in `wppack-sanitize-characters.php` to match
+  the tag BEFORE tagging.** `wp plugin list` reads the header, not the
+  composer version — v1.0.1 shipped with a `1.0.0` header because this was
+  skipped; don't repeat it.
+- Tags are `vX.Y.Z` (this repo's existing convention). Packagist picks new
+  tags up automatically via the GitHub integration — no manual submission.
+
 ## Git commit discipline
 
 - **One commit = one logical change.** Never sweep in unrelated changes;

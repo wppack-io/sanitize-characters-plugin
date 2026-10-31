@@ -1,0 +1,17 @@
+# Keeps the actions in .github/workflows current. Dependabot also
+# regenerates .github/workflows/actions.lock in the same pull request.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Skip releases younger than a week: a hijacked tag is usually caught
+    # and reverted within days.
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns: ['*']
+    commit-message:
+      prefix: chore(ci)

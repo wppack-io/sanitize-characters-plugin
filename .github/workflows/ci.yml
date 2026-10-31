@@ -7,6 +7,13 @@ on:
     branches: [1.x]
   workflow_dispatch:
 
+# One run per PR / branch: a new push cancels the run still in progress.
+# The event name keeps manual full-matrix runs (workflow_dispatch) in their
+# own group, so a push to the same branch doesn't cancel them.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   phpstan:
     name: PHPStan

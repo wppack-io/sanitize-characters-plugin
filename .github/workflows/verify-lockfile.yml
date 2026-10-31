@@ -1,0 +1,31 @@
+# Fails when .github/workflows/actions.lock is out of sync with the
+# workflows, or a locked commit no longer verifies upstream (e.g. a tag
+# was moved). Fix with `gh actions-lock` and commit the result.
+# Based on github/gh-actions-lock's .github/workflows/verify-lockfile.yml.
+name: Verify lockfile
+
+on:
+  push:
+    branches: [1.x]
+  pull_request:
+    branches: [1.x]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify actions.lock
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - run: gh extension install github/gh-actions-lock --pin v0.4.0
+      - run: gh actions-lock --verify

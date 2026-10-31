@@ -82,6 +82,7 @@ registered from static methods, English comments explaining *why*.
 | Code style fix | `vendor/bin/php-cs-fixer fix` |
 | Dev server (browser testing) | `bin/dev-server` → http://localhost:8082 (admin / password); override port with `SANITIZE_CHARACTERS_DEV_PORT` |
 | Reset dev site to fresh state | `bin/dev-reset` (also bootstraps first-time setup; seeds a clean post plus a dirty post/meta injected past the filter for the CLI to find) |
+| Lock workflow actions | `gh actions-lock` after adding a workflow or changing any `uses:` — commit `.github/workflows/actions.lock` with it; CI (`verify-lockfile.yml`) fails on a stale lockfile |
 
 Ports are offset from disable-comments' (3310/3311) so the plugins' databases
 can run side by side (3312 is taken by another local project).
